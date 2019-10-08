@@ -1,29 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport')
 const models = require('./models');
-const { User } = models;
+
+const users = require('./routes/api/users');
 
 const app = express();
-// Parse Application / JSON
+
+// Body Parser Middleware
 app.use(bodyParser.json());
-//Parse Application / x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
-// Test Route
-app.get('/', (req, res) => {
-  res.send("Hello World!!")
-});
 
-models.sequelize.authenticate().then(()=>{
+models.sequelize.authenticate().then(() => {
   console.log(`Connected to the db.`)
 })
 
-// Add Users
-app.post('/api/register', (req, res) => {
-  console.log(req.body);
-  User.create(req.body)
-    .then(user => res.json(user))
-});
+// Passport Middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
+
+// Use Routes
+app.use('/api/users', users);
 
 const port = process.env.PORT || 5000;
 
