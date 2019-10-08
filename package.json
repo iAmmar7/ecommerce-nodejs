@@ -1,0 +1,24 @@
+{
+  "name": "ecommerce-nodejs",
+  "version": "1.0.0",
+  "description": "E-Commerce App with Node.js only",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon index.js"
+  },
+  "author": "Ammar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^1.7.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "sequelize": "^5.19.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
