@@ -1,32 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { User } = require('./sequelize');
+const models = require('./models');
+const { User } = models;
 
 const app = express();
-
 // Parse Application / JSON
 app.use(bodyParser.json());
 //Parse Application / x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// //Initialize an Instance of Sequelize
-// const sequelize = new Sequelize({
-//   database: "",
-//   username: "",
-//   password: "",
-//   dialect: "mysql"
-// });
-
-// // Database Connection
-// sequelize
-//   .authenticate()
-//   .then(() => console.log('Database connected successfully!'))
-//   .catch(err => console.log('Database error ' + err));
-
 // Test Route
 app.get('/', (req, res) => {
   res.send("Hello World!!")
 });
+
+models.sequelize.authenticate().then(()=>{
+  console.log(`Connected to the db.`)
+})
 
 // Add Users
 app.post('/api/register', (req, res) => {
