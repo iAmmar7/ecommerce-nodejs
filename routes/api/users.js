@@ -59,4 +59,73 @@ router.post("/register", (req, res) => {
     .catch(err => console.log(err));
 });
 
+// @route /api/users/login
+// @desc Log in User
+// @access public
+router.post("/login", (req, res) => {
+  const errors = {};
+
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Find user by email
+  User.findOne({
+      where: {
+        email
+      }
+    })
+    .then(user => {
+      if (!user) {
+        errors.email = "User not found";
+        return res.status(400).json(errors);
+      }
+
+      // Compare password
+      bcrypt.compare(password, user.password)
+        .then(isMatch => {
+          if (isMatch) {
+            const payload = {
+              id: user.id,
+              username: user.username,
+              email: user.email
+            }
+
+            // Sign Token
+            jwt.sign(
+              payload,
+              keys.secretOrKey, {
+                expiresIn: 120
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                })
+              }
+            )
+          } else {
+            errors.password = "Password is incorrect!";
+            return res.status(400).json(errors);
+          }
+        })
+    })
+})
+
+// @route /api/users/current
+// @desc Logged in User
+// @access private
+router.get(
+  "/current",
+  passport.authenticate('jwt', {
+    session: false
+  }),
+  (req, res) => {
+    res.json({
+      id: req.user.id,
+      username: req.user.username,
+      email: req.user.email
+    });
+  }
+);
+
 module.exports = router;
