@@ -5,9 +5,13 @@ module.exports = (sequelize, type) => {
       primaryKey: true,
       autoIncrement: true
     },
-    username: type.STRING,
+    firstname: type.STRING,
+    lastname: type.STRING,
     email: type.STRING,
-    password: type.STRING
+    password: type.STRING,
+    admin: type.BOOLEAN,
+    dob: type.DATEONLY,
+    gender: type.ENUM('male', 'female')
   }, {
     tableName: "users" //optional
   });

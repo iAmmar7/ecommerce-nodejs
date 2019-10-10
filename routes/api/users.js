@@ -23,8 +23,10 @@ router.get("/test", (req, res) => {
 // @desc Signup User
 // @access Public
 router.post("/register", (req, res) => {
-  console.log(req.body);
   const errors = {};
+
+  // User.create(req.body)
+  //   .then(user => res.json(user));
 
   User.findOne({
       where: {
@@ -33,16 +35,19 @@ router.post("/register", (req, res) => {
     })
     .then(user => {
       if (user) {
-        console.log(user);
         errors.email = "Email already exist";
         return res.status(400).json(errors);
       } else {
         console.log(user);
 
         const newUser = new User({
-          username: req.body.username,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
           email: req.body.email,
-          password: req.body.password
+          password: req.body.password,
+          admin: req.body.admin,
+          dob: req.body.dob,
+          gender: req.body.gender
         });
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -56,7 +61,7 @@ router.post("/register", (req, res) => {
         });
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(`User registration API error ${err}`));
 });
 
 // @route /api/users/login

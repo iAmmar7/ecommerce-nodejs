@@ -8,11 +8,14 @@ const users = require('./routes/api/users');
 const app = express();
 
 // Body Parser Middleware
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use(bodyParser.json());
 
+models.sequelize.sync({
+  force: false
+});
 
 models.sequelize.authenticate().then(() => {
   console.log(`Connected to the db.`)
