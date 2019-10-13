@@ -5,13 +5,49 @@ const passport = require("passport");
 // Product Controller
 const ProductController = require("../../controller/product");
 
-// @route api/products/add-product
+// @route api/products/add
 // @desc Add Product
 // @access Private
 router.post(
-  "/add-product",
+  "/add",
   passport.authenticate("jwt", { session: false }),
   ProductController.add_product
+);
+
+// @route api/products/read/:id
+// @desc Read Product
+// @access Private
+router.get(
+  "/read/:id",
+  passport.authenticate("jwt", { session: false }),
+  ProductController.read_product
+);
+
+// @route api/products/read-all
+// @desc Read Product
+// @access Private
+router.get(
+  "/read-all",
+  passport.authenticate("jwt", { session: false }),
+  ProductController.readAll_product
+);
+
+// @route api/products/edit/:id
+// @desc Edit Product
+// @access Private
+router.put(
+  "/edit/:id",
+  passport.authenticate("jwt", { session: false }),
+  ProductController.edit_product
+);
+
+// @route api/products/remove/:id
+// @desc Delete Product
+// @access Private
+router.delete(
+  "/remove/:id",
+  passport.authenticate("jwt", { session: false }),
+  ProductController.remove_product
 );
 
 module.exports = router;
