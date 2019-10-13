@@ -5,10 +5,6 @@ const passport = require("passport");
 // Controllers
 const UserController = require("../../controller/user");
 
-// Load User Model
-const models = require("../../models");
-const { User } = models;
-
 // @route   Get api/users/test
 // @desc    Test users route
 // @access  Public

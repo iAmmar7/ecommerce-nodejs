@@ -31,7 +31,7 @@ module.exports = function login(req, res, err) {
             payload,
             keys.secretOrKey,
             {
-              expiresIn: 120
+              expiresIn: 3600
             },
             (err, token) => {
               res.json({
