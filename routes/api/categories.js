@@ -14,4 +14,13 @@ router.post(
   CategoryController.add_category
 );
 
+// @route api/categories/edit/:id
+// @desc Edit Category
+// @access Private
+router.put(
+  "/edit/:id",
+  passport.authenticate("jwt", { session: false }),
+  CategoryController.edit_category
+);
+
 module.exports = router;

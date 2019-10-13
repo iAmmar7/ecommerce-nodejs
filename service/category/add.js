@@ -1,7 +1,7 @@
 const models = require("../../models");
 const { Category } = models;
 
-module.exports = function add(req, res, err) {
+module.exports = function add(req, res) {
   Category.create({
     name: req.body.name
   })
