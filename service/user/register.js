@@ -15,8 +15,16 @@ module.exports = function register(req, res, err) {
         return res.status(400).json(err);
       } else {
         const newUser = new User({
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
+          firstname:
+            req.body.firstname
+              .trim()
+              .charAt(0)
+              .toUpperCase() + req.body.firstname.trim().slice(1),
+          lastname:
+            req.body.lastname
+              .trim()
+              .charAt(0)
+              .toUpperCase() + req.body.firstname.trim().slice(1),
           email: req.body.email,
           password: req.body.password,
           admin: req.body.admin,

@@ -15,6 +15,15 @@ module.exports = (sequelize, type) => {
             msg: "Category name is required!"
           }
         }
+      },
+      position: {
+        type: type.INTEGER(12),
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Postion of category is required!"
+          }
+        }
       }
     },
     {

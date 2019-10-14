@@ -4,7 +4,8 @@ const { Category } = models;
 module.exports = function edit(req, res) {
   Category.update(
     {
-      name: req.body.name
+      name: req.body.name,
+      position: req.body.position
     },
     {
       where: {

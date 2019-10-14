@@ -60,15 +60,11 @@ module.exports = (sequelize, type) => {
             msg: "Active field is required!"
           }
         }
+      },
+      category_id: {
+        type: type.INTEGER(12),
+        allowNull: false
       }
-      // category_id: {
-      //   type: type.INTEGER(12),
-      //   allowNull: false,
-      //   references: {
-      //     model: "Category",
-      //     key: "id"
-      //   }
-      // }
     },
     {
       tableName: "product"
