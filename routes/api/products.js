@@ -17,20 +17,12 @@ router.post(
 // @route api/products/read/:id
 // @desc Read Product
 // @access Private
-router.get(
-  "/read/:id",
-  passport.authenticate("jwt", { session: false }),
-  ProductController.read_product
-);
+router.get("/read/:id", ProductController.read_product);
 
 // @route api/products/read-all
 // @desc Read Product
 // @access Private
-router.get(
-  "/read-all",
-  passport.authenticate("jwt", { session: false }),
-  ProductController.readAll_product
-);
+router.get("/read-all", ProductController.readAll_product);
 
 // @route api/products/edit/:id
 // @desc Edit Product

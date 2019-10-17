@@ -10,6 +10,7 @@ module.exports = (sequelize, type) => {
       name: {
         type: type.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           notNull: {
             msg: "Category name is required!"

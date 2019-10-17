@@ -17,11 +17,7 @@ router.post(
 // @route api/categories/read
 // @desc Read Category
 // @access Private
-router.get(
-  "/read",
-  passport.authenticate("jwt", { session: false }),
-  CategoryController.read_category
-);
+router.get("/read", CategoryController.read_category);
 
 // @route api/categories/edit/:id
 // @desc Edit Category

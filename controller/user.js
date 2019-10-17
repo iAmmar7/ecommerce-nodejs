@@ -6,6 +6,10 @@ const validateLoginInput = require("../validation/login");
 const register = require("../service/user/register");
 const login = require("../service/user/login");
 
+const add = require("../service/user/add");
+
+const isAdmin = require("../lib/utils/isAdmin");
+
 // Register Controller
 exports.register_user = (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -34,4 +38,10 @@ exports.current_user = (req, res) => {
     id: req.user.id,
     email: req.user.email
   });
+};
+
+// Add User Address
+exports.add_address = (req, res) => {
+  isAdmin(req, res);
+  add(req, res);
 };

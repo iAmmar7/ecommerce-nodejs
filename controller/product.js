@@ -4,9 +4,11 @@ const read = require("../service/product/read");
 const readAll = require("../service/product/readAll");
 const edit = require("../service/product/edit");
 const remove = require("../service/product/remove");
+const isAdmin = require("../lib/utils/isAdmin");
 
 // Add-Product Controller
 exports.add_product = (req, res) => {
+  isAdmin(req, res);
   add(req, res);
 };
 
@@ -22,10 +24,12 @@ exports.readAll_product = (req, res) => {
 
 // Edit-Product Controller
 exports.edit_product = (req, res) => {
+  isAdmin(req, res);
   edit(req, res);
 };
 
 // Delete-Product Controller
 exports.remove_product = (req, res) => {
+  isAdmin(req, res);
   remove(req, res);
 };
