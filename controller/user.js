@@ -7,8 +7,9 @@ const register = require("../service/user/register");
 const login = require("../service/user/login");
 
 const add = require("../service/user/add");
-
-const isAdmin = require("../lib/utils/isAdmin");
+const read = require("../service/user/read");
+const edit = require("../service/user/edit");
+const remove = require("../service/user/remove");
 
 // Register Controller
 exports.register_user = (req, res) => {
@@ -42,6 +43,20 @@ exports.current_user = (req, res) => {
 
 // Add User Address
 exports.add_address = (req, res) => {
-  isAdmin(req, res);
   add(req, res);
+};
+
+// Read User Address
+exports.read_address = (req, res) => {
+  read(req, res);
+};
+
+// Edit User Address
+exports.edit_address = (req, res) => {
+  edit(req, res);
+};
+
+// Remove User Address
+exports.remove_address = (req, res) => {
+  remove(req, res);
 };

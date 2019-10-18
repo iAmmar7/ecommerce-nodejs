@@ -1,10 +1,10 @@
-const models = require("../../models");
-const { Category } = models;
+const { Category, Product } = require("../../models");
 
 const isEmpty = require("../../validation/is_empty");
 
 module.exports = function read(req, res) {
   Category.findAll({
+    include: [Product],
     order: [["position", "ASC"]]
   })
     .then(category => {
